@@ -1,24 +1,17 @@
 import datetime
+from collections import defaultdict
 
 
 class SimpleReport:
-    # def __init__(self) -> None:
-    #     pass
 
     @staticmethod
     def company_with_more_products(products):
-        companies = {}
+        companies = defaultdict(int)
 
         for product in products:
+            companies[product['nome_da_empresa']] += 1
 
-            current_company = product['nome_da_empresa']
-            if current_company not in companies:
-                companies[current_company] = 1
-            else:
-                companies[current_company] += 1
-
-        max_company = max(companies, key=companies.get)
-        return max_company
+        return max(companies, key=companies.get)
 
     @staticmethod
     def generate(list_products):
