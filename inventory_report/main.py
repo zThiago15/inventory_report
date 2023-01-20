@@ -6,14 +6,21 @@ from inventory_report.importer.xml_importer import XmlImporter
 
 
 def main():
+    pass
     if len(sys.argv) < 3:
-        return 'Verifique os argumentos'
+        sys.stderr.write('Verifique os argumentos\n')
 
     *_, path, report_type = sys.argv
 
-    if ('csv' in path):
-        return InventoryRefactor(CsvImporter).import_data(path, report_type)
-    elif ('json' in path):
-        return InventoryRefactor(JsonImporter).import_data(path, report_type)
+    if ('.csv' in path):
+        print(InventoryRefactor(CsvImporter).import_data(path, report_type))
+    elif ('.json' in path):
+        print(InventoryRefactor(JsonImporter).import_data(path, report_type))
+    elif ('.xml' in path):
+        print(InventoryRefactor(XmlImporter).import_data(path, report_type))
     else:
-        return InventoryRefactor(XmlImporter).import_data(path, report_type)
+        raise ValueError('invalid extension file')
+
+
+if __name__ == "__main__":
+    main()
