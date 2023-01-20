@@ -1,2 +1,6 @@
+# from sys import argv
+
+
 def main():
-    pass
+    def strderr():
+        pass
