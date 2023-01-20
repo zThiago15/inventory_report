@@ -1,5 +1,6 @@
 import csv
 import json
+import xmltodict
 from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 
@@ -12,6 +13,7 @@ class Inventory:
             return Inventory.read_CSV(path, typeReport)
         elif 'json' in path:
             return Inventory.read_JSON(path, typeReport)
+        return Inventory.read_XML(path, typeReport)
 
     @staticmethod
     def read_CSV(pathCSV: str, typeReport: str):
@@ -24,14 +26,14 @@ class Inventory:
     def read_JSON(pathJSON, typeReport: str):
         with open(pathJSON) as file:
             data = json.loads(file.read())
-        
+
         return Inventory.generate_report(data, typeReport)
 
     @staticmethod
-    def read_JSON(pathJSON, typeReport: str):
-        with open(pathJSON) as file:
-            data = json.loads(file.read())
-        
+    def read_XML(pathXML, typeReport: str):
+        with open(pathXML) as file:
+            data = xmltodict.parse(file.read())['dataset']['record']
+
         return Inventory.generate_report(data, typeReport)
 
     @staticmethod
@@ -42,4 +44,4 @@ class Inventory:
         return CompleteReport.generate(data)
 
 
-print(Inventory.import_data('inventory_report/data/inventory.json', 'completo'))
+print(Inventory.import_data('inventory_report/data/inventory.xml', 'completo'))
