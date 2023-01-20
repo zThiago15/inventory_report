@@ -22,7 +22,7 @@ def test_decorar_relatorio():
     assert (
         "\033[32mData de fabricação mais antiga:\033[0m" in simple_report
     ) is True
-    
+
     assert (
         "\033[36m2010-03-27\033[0m" in simple_report
     ) is True
@@ -36,7 +36,7 @@ def test_decorar_relatorio():
     assert (
         "\033[32mData de fabricação mais antiga:\033[0m" in complete_report
     ) is True
-    
+
     assert (
         "\033[36m2010-03-27\033[0m" in complete_report
     ) is True
